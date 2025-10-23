@@ -1,0 +1,20 @@
+.header{
+  width: 100%;
+  min-height: 70px;
+  padding: 20px 10px;
+  background-color: cornflowerblue;
+  color: white;
+
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  .navItem{
+    &:hover{
+      color: honeydew;
+      text-decoration: underline;
+      transition: all .3s ease-in-out;
+    }
+  }
+}
+

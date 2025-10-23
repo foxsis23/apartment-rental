@@ -1,13 +1,15 @@
-import './App.scss'
-import {Button} from "@/components/ui/button";
+import './App.scss';
+import { BrowserRouter, Route, Routes } from 'react-router';
+import MainView from '@/views/MainView';
 
 function App() {
-
   return (
-    <div>
-      Main page
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainView />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
