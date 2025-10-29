@@ -1,20 +1,31 @@
 export interface Apartment {
-  id: number;
-  title: string;
+  id: string;
   description: string;
-  pricePerMonth: number; // грн/місяць
-  totalPrice: number;
-  address: string;
-  district: string; // район
-  roomsCount: number; // кількість кімнат
+  price: number;
+  district: string;
+  street: string;
+  buildingNum: string;
+  roomsCount: number;
+  furnitureType: string;
+  isPetFriendly: boolean;
+  isChildFriendly: boolean;
   floor: number;
-  totalFloors: number;
-  area: number; // площа (м²)
-  furnished: boolean; // мебльована
-  balcony: boolean;
-  petsAllowed: boolean;
-  availableFrom: string; // ISO-дата
-  photos: string[]; // посилання на зображення
-  createdAt: string;
-  updatedAt: string;
+  buildingFloorCount: number;
+  area: number;
+  isActive: boolean;
+  publishingDate: string;
+  photosUrls: string[];
+
+  phoneNumber: string;
+  ownerName: string;
+}
+
+export interface Realtor {
+  id: string;
+  fullName: string;
+  phoneNumber: string;
+  description: string;
+  rating: number;
+  isVerified: boolean;
+  feedbackCount: number;
 }
