@@ -1,8 +1,11 @@
 import { Header } from '@/components/layout/Header';
 import { mockApartments } from '@/mock/mockApartments.ts';
 import { ApartmentCard } from '@/components/ApartmentCard';
+import ApartmentApi from '@/lib/api/apartmentApi.ts';
 
 export const MainView = () => {
+  console.log(ApartmentApi.getAllApartments());
+
   return (
     <>
       <Header />
