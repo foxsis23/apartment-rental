@@ -1,5 +1,5 @@
 import api from './axios';
-import type { Apartment } from '@/types';
+import type { Apartment } from '@/lib/types';
 
 class ApartmentApi {
   async getAllApartments() {
@@ -7,7 +7,7 @@ class ApartmentApi {
     return res.data;
   }
 
-  async getApartmentById(id: string) {
+  async getApartmentById(id: number) {
     const res = await api.get(`/Apartament/${id}`);
     return res.data;
   }

@@ -6,10 +6,38 @@ import {
   TableHeader,
   TableHead,
 } from '@/components/ui/table';
-import { mockApartments } from '@/mock/mockApartments.ts';
+import { useEffect, useState } from 'react';
+import styles from './ApartmentDetail.module.scss';
+import type { Apartment } from '@/lib/types';
+import ApartmentApi from '@/lib/api/apartmentApi.ts';
+import { Spinner } from '@/components/ui/spinner.tsx';
+import { useParams } from 'react-router';
 
 export function ApartmentDetailView() {
-  const apartment = mockApartments[0];
+  const [apartment, setApartment] = useState<Apartment | null>(null);
+  const params = useParams();
+
+  const [selected, setSelected] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const openPhoto = (url: string) => {
+    setSelected(url);
+    setTimeout(() => setIsVisible(true), 10);
+  };
+
+  const closePhoto = () => {
+    setIsVisible(false);
+    setTimeout(() => setSelected(null), 200);
+  };
+
+  useEffect(() => {
+    ApartmentApi.getApartmentById(Number(params.id)).then((apartment) => setApartment(apartment));
+  }, [params.id]);
+
+  if (!apartment)
+    return (
+      <Spinner className="size-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+    );
 
   return (
     <div className="p-6 space-y-6">
@@ -24,14 +52,14 @@ export function ApartmentDetailView() {
 
         <div className="flex flex-col justify-center space-y-2">
           <p className="text-muted-foreground">{apartment.description}</p>
-          <p className="text-xl font-bold text-green-600">
+          <p className="text-xl font-bold">
             ${apartment.price.toLocaleString()}
             <span className="text-base font-normal text-muted-foreground"> / місяць</span>
           </p>
         </div>
       </div>
 
-      <Table>
+      <Table className={styles.tableOrange}>
         <TableHeader>
           <TableRow>
             <TableHead>Параметр</TableHead>
@@ -80,7 +108,9 @@ export function ApartmentDetailView() {
             <TableCell>Власник</TableCell>
             <TableCell>
               {apartment.ownerName} <br />
-              <span className="text-muted-foreground">{apartment.phoneNumber}</span>
+              <a href={`tel:${apartment.phoneNumber}`} className="text-orange-600 hover:underline">
+                {apartment.phoneNumber}
+              </a>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -91,13 +121,27 @@ export function ApartmentDetailView() {
                   key={i}
                   src={url}
                   alt={`photo-${i}`}
-                  className="w-20 h-16 rounded-lg border object-cover"
+                  className="w-20 h-16 rounded-lg border object-cover cursor-pointer"
+                  onClick={() => openPhoto(url)}
                 />
               ))}
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
+
+      {selected && (
+        <div
+          className={`${styles.modalOverlay} ${isVisible ? styles.active : ''}`}
+          onClick={closePhoto}
+        >
+          <img
+            src={selected}
+            alt="full"
+            className={`${styles.photoModal} ${isVisible ? styles.active : ''}`}
+          />
+        </div>
+      )}
     </div>
   );
 }

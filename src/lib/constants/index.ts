@@ -5,6 +5,6 @@ export const navItems = [
   },
   {
     name: 'Для орендодавців',
-    path: '/for-organizers',
+    path: '/organizers',
   },
 ];

@@ -4,10 +4,21 @@
   max-width: 600px;
   width: 100%;
 
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
   .cardInfo{
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    @media (max-width: 500px) {
+      justify-content: center;
+      text-align: center;
+    }
   }
 
   .cardDetails{
@@ -16,18 +27,29 @@
     gap: 10px;
     flex-wrap: wrap;
     font-size: 14px;
+
+    @media (max-width: 500px) {
+      justify-content: center;
+    }
   }
 
   .cardDetail{
     padding: 8px;
-    background-color: #99a1af;
+    background-color: var(--accent-orange);
     color: white;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
   }
 
   .img{
     height: 300px;
     width: 300px;
     border-radius: 10px;
+
+    @media (max-width: 500px) {
+      width: 340px;
+    }
   }
 }

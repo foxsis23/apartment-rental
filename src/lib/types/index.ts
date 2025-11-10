@@ -1,5 +1,5 @@
 export interface Apartment {
-  id: string;
+  id?: string;
   description: string;
   price: number;
   district: string;
@@ -12,8 +12,8 @@ export interface Apartment {
   floor: number;
   buildingFloorCount: number;
   area: number;
-  isActive: boolean;
-  publishingDate: string;
+  isActive?: boolean;
+  publishingDate?: string;
   photosUrls: string[];
 
   phoneNumber: string;

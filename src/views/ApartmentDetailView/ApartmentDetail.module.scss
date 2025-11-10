@@ -1,0 +1,57 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.photoModal {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 100;
+  object-fit: contain;
+
+  &.active {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tableOrange {
+  border-collapse: collapse;
+  width: 100%;
+
+  th {
+    background-color: var(--accent-orange);
+    color: white;
+    text-align: left;
+    padding: 8px;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:hover td {
+    background-color: rgba(255, 123, 0, 0.08);
+    transition: background-color 0.2s ease;
+  }
+}

@@ -2,16 +2,22 @@
   width: 100%;
   min-height: 70px;
   padding: 20px 10px;
-  background-color: cornflowerblue;
-  color: white;
+  color: black;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6px);
 
   display: flex;
   gap: 20px;
   align-items: center;
 
+  .logo{
+    width: 50px;
+    height: 50px;
+  }
+
   .navItem{
     &:hover{
-      color: honeydew;
+      color: var(--accent-orange);
       text-decoration: underline;
       transition: all .3s ease-in-out;
     }
