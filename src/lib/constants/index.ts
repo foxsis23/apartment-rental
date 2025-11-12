@@ -1,10 +1,12 @@
 export const navItems = [
   {
-    name: 'Для орендарів',
+    name: 'Орендарям',
     path: '/',
   },
   {
-    name: 'Для орендодавців',
+    name: 'Орендодавцям',
     path: '/organizers',
   },
 ];
+
+export const STORAGE_KEY = 'favoriteApartments';

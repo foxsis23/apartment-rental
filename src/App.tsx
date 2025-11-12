@@ -5,6 +5,7 @@ import { Layout } from '@/components/layout/Layout.tsx';
 import OrganizersView from '@/views/OrganizersView';
 import AddApartmentView from '@/views/AddApartmentView';
 import { Toaster } from '@/components/ui/sonner';
+import { FavoritesProvider } from '@/lib/context/useFavoriteContext.tsx';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <FavoritesProvider>
+        <RouterProvider router={router} />
+      </FavoritesProvider>
       <Toaster />
     </>
   );
