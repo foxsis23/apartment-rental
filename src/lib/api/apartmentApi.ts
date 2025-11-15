@@ -2,8 +2,8 @@ import api from './axios';
 import type { Apartment } from '@/lib/types';
 
 class ApartmentApi {
-  async getAllApartments() {
-    const res = await api.get('/Apartament/all');
+  async getAllApartments(searchParams?: string) {
+    const res = await api.get(`/Apartament/all${searchParams}`);
     return res.data;
   }
 
@@ -20,7 +20,7 @@ class ApartmentApi {
     return api.delete(`/Apartament/${id}`);
   }
 
-  async updateApartment(id: string, apartment: Apartment) {
+  async updateApartment(id: number, apartment: Apartment) {
     return api.put(`/Apartament/${id}`, apartment);
   }
 }

@@ -3,26 +3,35 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { Button } from '@/components/ui/button.tsx';
 import { useNavigate } from 'react-router';
 import type { Apartment } from '@/lib/types';
-import { HeartIcon } from 'lucide-react';
+import { HeartIcon, Pen, Trash } from 'lucide-react';
 import { cn } from '@/lib/utils.ts';
 import { useFavorites } from '@/lib/context/useFavoriteContext.tsx';
+import ApartmentApi from '@/lib/api/apartmentApi.ts';
+import { toast } from 'sonner';
 
 interface ApartmentCardProps {
   apartment: Apartment;
   vertical?: boolean;
+  canEdit?: boolean;
 }
 
-export const ApartmentCard = ({ apartment, vertical }: ApartmentCardProps) => {
+export const ApartmentCard = ({ apartment, vertical, canEdit }: ApartmentCardProps) => {
   const navigate = useNavigate();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+
+  const deleteApartment = async () => {
+    await ApartmentApi.deleteApartment(apartment.id);
+    toast.success('Оголошення видалено!');
+    location.reload();
+  };
 
   return (
     <div className={cn(styles.card, { [styles.vertical]: vertical })}>
       <Carousel className="w-full max-w-[300px]">
         <CarouselContent>
-          {apartment.photosUrls.map((photo, index) => (
-            <CarouselItem key={index} className="relative">
-              <img src={photo} alt="apartment-picture" className={styles.img} />
+          {!apartment.photosUrls ? (
+            <CarouselItem className="relative">
+              <img src={apartment.photoUrl} alt="apartment-picture" className={styles.img} />
               <HeartIcon
                 onClick={() =>
                   isFavorite(apartment.id) ? removeFavorite(apartment.id) : addFavorite(apartment)
@@ -32,12 +41,46 @@ export const ApartmentCard = ({ apartment, vertical }: ApartmentCardProps) => {
                 className="absolute top-2 right-2 size-8 hover:fill-rose-500 cursor-pointer"
               />
             </CarouselItem>
-          ))}
+          ) : (
+            <>
+              {apartment.photosUrls.map((photo, index) => (
+                <CarouselItem key={index} className="relative">
+                  <img src={photo} alt="apartment-picture" className={styles.img} />
+                  <HeartIcon
+                    onClick={() =>
+                      isFavorite(apartment.id)
+                        ? removeFavorite(apartment.id)
+                        : addFavorite(apartment)
+                    }
+                    fill={isFavorite(apartment.id) ? '#ff2056' : 'none'}
+                    stroke="#FFF"
+                    className="absolute top-2 right-2 size-8 hover:fill-rose-500 cursor-pointer"
+                  />
+                </CarouselItem>
+              ))}
+            </>
+          )}
         </CarouselContent>
       </Carousel>
       <div className="flex flex-col justify-between">
         <div className={styles.cardInfo}>
-          <h3 className="font-bold md:text-2xl text-4xl">$ {apartment.price}</h3>
+          <div className="flex justify-between">
+            <h3 className="font-bold md:text-2xl text-4xl">$ {apartment.price}</h3>
+            {canEdit && (
+              <div>
+                <Button
+                  variant="ghost"
+                  className="cursor-pointer"
+                  onClick={() => navigate(`/apartment/edit/${apartment.id}`)}
+                >
+                  <Pen />
+                </Button>
+                <Button variant="ghost" className="cursor-pointer" onClick={deleteApartment}>
+                  <Trash />
+                </Button>
+              </div>
+            )}
+          </div>
           <span className="text-sm text-gray-500">
             {apartment.street}, {apartment.district}
           </span>

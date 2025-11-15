@@ -14,34 +14,47 @@ import { Input } from '@/components/ui/input.tsx';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { Plus, Trash2 } from 'lucide-react';
-import { formSchema, type SchemaType } from '@/components/AddApartmentForm/validationSchema.ts';
+import { formSchema, type SchemaType } from '@/components/ApartmentForm/validationSchema.ts';
 import ApartmentApi from '@/lib/api/apartmentApi.ts';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
+import type { Apartment } from '@/lib/types';
 
-export const AddApartmentForm = () => {
+interface ApartmentFormProps {
+  apartment?: Apartment;
+}
+
+export const ApartmentForm = ({ apartment }: ApartmentFormProps) => {
   const navigate = useNavigate();
   const form = useForm<SchemaType>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      description: '',
-      price: 0,
-      district: 1,
-      street: '',
-      buildingNum: '',
-      roomsCount: 1,
-      isPetFriendly: false,
-      isChildFriendly: false,
-      floor: 1,
-      buildingFloorCount: 1,
-      area: 0,
-      furnitureType: 1,
-      photosUrls: [''],
-      owner: {
-        ownerName: '',
-        phoneNumber: '',
-      },
-    },
+    defaultValues: !apartment
+      ? {
+          description: '',
+          price: 0,
+          district: 1,
+          street: '',
+          buildingNum: '',
+          roomsCount: 1,
+          isPetFriendly: false,
+          isChildFriendly: false,
+          floor: 1,
+          buildingFloorCount: 1,
+          area: 0,
+          furnitureType: 1,
+          photosUrls: [''],
+          owner: {
+            ownerName: '',
+            phoneNumber: '',
+          },
+        }
+      : {
+          ...apartment,
+          owner: {
+            ownerName: apartment.ownerName,
+            phoneNumber: apartment.ownerNumber,
+          },
+        },
   });
 
   const { control, handleSubmit } = form;
@@ -52,9 +65,13 @@ export const AddApartmentForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (apartment) {
+      await ApartmentApi.updateApartment(apartment.id as number, values);
+    }
     await ApartmentApi.createAparment(values);
+
     form.reset();
-    toast.success('Оголошення успішно створено!');
+    toast.success(apartment ? 'Оголошення відредаговано!' : 'Оголошення успішно створено!');
     navigate('/organizers');
   };
 

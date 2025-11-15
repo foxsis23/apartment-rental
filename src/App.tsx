@@ -6,6 +6,7 @@ import OrganizersView from '@/views/OrganizersView';
 import AddApartmentView from '@/views/AddApartmentView';
 import { Toaster } from '@/components/ui/sonner';
 import { FavoritesProvider } from '@/lib/context/useFavoriteContext.tsx';
+import EditApartmentView from '@/views/EditApartmentView';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: '/apartments/:id', element: <ApartmentDetailView /> },
       { path: '/organizers', element: <OrganizersView /> },
       { path: '/add-apartment', element: <AddApartmentView /> },
+      { path: '/apartment/edit/:id', element: <EditApartmentView /> },
     ],
   },
 ]);

@@ -2,7 +2,7 @@ export interface Apartment {
   id?: number;
   description: string;
   price: number;
-  district: string;
+  district: number;
   street: string;
   buildingNum: string;
   roomsCount: number;
@@ -15,9 +15,13 @@ export interface Apartment {
   isActive?: boolean;
   publishingDate?: string;
   photosUrls: string[];
+  photoUrl?: string;
 
+  ownerNumber: string;
   phoneNumber: string;
   ownerName: string;
+
+  suggestions?: Apartment[];
 }
 
 export interface Realtor {

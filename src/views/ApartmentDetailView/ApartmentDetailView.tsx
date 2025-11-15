@@ -12,6 +12,8 @@ import type { Apartment } from '@/lib/types';
 import ApartmentApi from '@/lib/api/apartmentApi.ts';
 import { Spinner } from '@/components/ui/spinner.tsx';
 import { useParams } from 'react-router';
+import { ApartmentCard } from '@/components/ApartmentCard';
+import { mockApartments } from '@/lib/mock/mockApartments.ts';
 
 export function ApartmentDetailView() {
   const [apartment, setApartment] = useState<Apartment | null>(null);
@@ -40,7 +42,7 @@ export function ApartmentDetailView() {
     );
 
   return (
-    <div className="p-6 space-y-6">
+    <section className="p-6 space-y-6">
       <div className="flex flex-col md:flex-row gap-6">
         <div className="flex-shrink-0">
           <img
@@ -108,8 +110,8 @@ export function ApartmentDetailView() {
             <TableCell>Власник</TableCell>
             <TableCell>
               {apartment.ownerName} <br />
-              <a href={`tel:${apartment.phoneNumber}`} className="text-orange-600 hover:underline">
-                {apartment.phoneNumber}
+              <a href={`tel:${apartment.ownerNumber}`} className="text-orange-600 hover:underline">
+                {apartment.ownerNumber}
               </a>
             </TableCell>
           </TableRow>
@@ -142,6 +144,21 @@ export function ApartmentDetailView() {
           />
         </div>
       )}
-    </div>
+
+      <div className="flex flex-col gap-3 mt-10">
+        <h3 className="text-center font-bold text-4xl">Рекомендовані квартири</h3>
+        <div className="flex mt-4 gap-4">
+          {!apartment.suggestions ? (
+            <Spinner className="size-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+          ) : (
+            <>
+              {apartment.suggestions.map((apartment) => (
+                <ApartmentCard apartment={apartment} key={apartment.id} />
+              ))}
+            </>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
