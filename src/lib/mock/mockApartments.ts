@@ -1,4 +1,4 @@
-import type { Apartment } from '@/types';
+import type { Apartment } from '@/lib/types';
 
 export const mockApartments: Apartment[] = [
   {
@@ -31,7 +31,7 @@ export const mockApartments: Apartment[] = [
     description: 'Панорамні вікна, простора кухня, паркомісце. Ідеально для пари.',
     price: 22000,
     district: 'Оболонський',
-    street: 'просп. Героїв Сталінграда',
+    street: 'просп. Героїв',
     buildingNum: '12',
     roomsCount: 2,
     furnitureType: 'частково мебльована',

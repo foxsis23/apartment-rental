@@ -66,7 +66,7 @@ export const ApartmentForm = ({ apartment }: ApartmentFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (apartment) {
-      await ApartmentApi.updateApartment(apartment.id as number, values);
+      await ApartmentApi.updateApartment({ ...values, id: apartment.id });
     }
     await ApartmentApi.createAparment(values);
 
@@ -287,7 +287,7 @@ export const ApartmentForm = ({ apartment }: ApartmentFormProps) => {
           )}
         />
 
-        <Button type="submit" className="bg-orange-500 hover:bg-orange-600 cursor-pointer">
+        <Button type="submit" className="bg-orange-500 hover:bg-orange-600">
           Зберегти
         </Button>
       </form>

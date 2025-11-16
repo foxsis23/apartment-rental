@@ -20,8 +20,8 @@ class ApartmentApi {
     return api.delete(`/Apartament/${id}`);
   }
 
-  async updateApartment(id: number, apartment: Apartment) {
-    return api.put(`/Apartament/${id}`, apartment);
+  async updateApartment(apartment: Apartment) {
+    return api.put(`/Apartament`, apartment);
   }
 }
 

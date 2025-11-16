@@ -43,7 +43,7 @@ export const MainView = () => {
     <div className="flex flex-col items-center justify-center gap-3 mt-10">
       <h1 className="font-bold text-center text-4xl">Список квартир</h1>
       <Filters onApply={(values) => setFilters(values)} />
-      <main className="flex gap-6 justify-center flex-wrap mt-4 md:items-stretch items-center">
+      <main className="flex gap-6 justify-center flex-wrap mt-4 md:items-stretch items-center px-4 md:p-0">
         {apartments.map((apartment) => (
           <ApartmentCard apartment={apartment} key={apartment.id} />
         ))}

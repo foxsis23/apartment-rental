@@ -38,7 +38,7 @@ export const OrganizersView = () => {
       <Button
         variant="ghost"
         size="default"
-        className="cursor-pointer transition ease-in duration-200 hover:scale-120"
+        className="transition ease-in duration-200 hover:scale-120"
         onClick={() => navigate('/add-apartment')}
       >
         Додати оголошення

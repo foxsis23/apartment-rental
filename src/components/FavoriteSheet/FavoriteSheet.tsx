@@ -16,7 +16,7 @@ export const FavoriteSheet = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" className="cursor-pointer">
+        <Button variant="ghost">
           Обране
           <HeartIcon />
         </Button>

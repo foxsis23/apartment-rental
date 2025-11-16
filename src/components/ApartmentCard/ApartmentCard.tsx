@@ -62,9 +62,9 @@ export const ApartmentCard = ({ apartment, vertical, canEdit }: ApartmentCardPro
           )}
         </CarouselContent>
       </Carousel>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between p-2.5">
         <div className={styles.cardInfo}>
-          <div className="flex justify-between">
+          <div className="flex md:justify-between justify-center">
             <h3 className="font-bold md:text-2xl text-4xl">$ {apartment.price}</h3>
             {canEdit && (
               <div>
@@ -75,7 +75,7 @@ export const ApartmentCard = ({ apartment, vertical, canEdit }: ApartmentCardPro
                 >
                   <Pen />
                 </Button>
-                <Button variant="ghost" className="cursor-pointer" onClick={deleteApartment}>
+                <Button variant="ghost" onClick={deleteApartment}>
                   <Trash />
                 </Button>
               </div>
