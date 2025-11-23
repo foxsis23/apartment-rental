@@ -20,7 +20,7 @@ export const ApartmentCard = ({ apartment, vertical, canEdit }: ApartmentCardPro
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   const deleteApartment = async () => {
-    await ApartmentApi.deleteApartment(apartment.id);
+    await ApartmentApi.deleteApartment(apartment.id!);
     toast.success('Оголошення видалено!');
     location.reload();
   };
@@ -34,9 +34,9 @@ export const ApartmentCard = ({ apartment, vertical, canEdit }: ApartmentCardPro
               <img src={apartment.photoUrl} alt="apartment-picture" className={styles.img} />
               <HeartIcon
                 onClick={() =>
-                  isFavorite(apartment.id) ? removeFavorite(apartment.id) : addFavorite(apartment)
+                  isFavorite(apartment.id!) ? removeFavorite(apartment.id!) : addFavorite(apartment)
                 }
-                fill={isFavorite(apartment.id) ? '#ff2056' : 'none'}
+                fill={isFavorite(apartment.id!) ? '#ff2056' : 'none'}
                 stroke="#FFF"
                 className="absolute top-2 right-2 size-8 hover:fill-rose-500 cursor-pointer"
               />
@@ -48,11 +48,11 @@ export const ApartmentCard = ({ apartment, vertical, canEdit }: ApartmentCardPro
                   <img src={photo} alt="apartment-picture" className={styles.img} />
                   <HeartIcon
                     onClick={() =>
-                      isFavorite(apartment.id)
-                        ? removeFavorite(apartment.id)
+                      isFavorite(apartment.id!)
+                        ? removeFavorite(apartment.id!)
                         : addFavorite(apartment)
                     }
-                    fill={isFavorite(apartment.id) ? '#ff2056' : 'none'}
+                    fill={isFavorite(apartment.id!) ? '#ff2056' : 'none'}
                     stroke="#FFF"
                     className="absolute top-2 right-2 size-8 hover:fill-rose-500 cursor-pointer"
                   />

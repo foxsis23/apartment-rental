@@ -6,7 +6,7 @@ export interface Apartment {
   street: string;
   buildingNum: string;
   roomsCount: number;
-  furnitureType: string;
+  furnitureType: number;
   isPetFriendly: boolean;
   isChildFriendly: boolean;
   floor: number;

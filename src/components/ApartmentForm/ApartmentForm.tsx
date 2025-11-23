@@ -61,14 +61,25 @@ export const ApartmentForm = ({ apartment }: ApartmentFormProps) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'photosUrls',
+    name: 'photosUrls' as never,
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (apartment) {
-      await ApartmentApi.updateApartment({ ...values, id: apartment.id });
+      await ApartmentApi.updateApartment({
+        ...values,
+        id: apartment.id,
+        ownerNumber: values.owner.phoneNumber,
+        phoneNumber: values.owner.phoneNumber,
+        ownerName: values.owner.ownerName,
+      });
     }
-    await ApartmentApi.createAparment(values);
+    await ApartmentApi.createAparment({
+      ...values,
+      ownerNumber: values.owner.phoneNumber,
+      phoneNumber: values.owner.phoneNumber,
+      ownerName: values.owner.ownerName,
+    });
 
     form.reset();
     toast.success(apartment ? 'Оголошення відредаговано!' : 'Оголошення успішно створено!');

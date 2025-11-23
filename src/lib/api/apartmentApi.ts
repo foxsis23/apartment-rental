@@ -16,7 +16,7 @@ class ApartmentApi {
     return api.post('/Apartament', apartment);
   }
 
-  async deleteApartment(id: string) {
+  async deleteApartment(id: number) {
     return api.delete(`/Apartament/${id}`);
   }
 

@@ -13,7 +13,6 @@ import ApartmentApi from '@/lib/api/apartmentApi.ts';
 import { Spinner } from '@/components/ui/spinner.tsx';
 import { useParams } from 'react-router';
 import { ApartmentCard } from '@/components/ApartmentCard';
-import { mockApartments } from '@/lib/mock/mockApartments.ts';
 
 export function ApartmentDetailView() {
   const [apartment, setApartment] = useState<Apartment | null>(null);

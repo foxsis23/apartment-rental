@@ -1,6 +1,6 @@
 import type { Apartment } from '@/lib/types';
 
-export const mockApartments: Apartment[] = [
+export const mockApartments = [
   {
     id: '1',
     description: 'Затишна квартира з новим ремонтом і меблями. Поруч метро, парк і супермаркет.',
@@ -251,4 +251,4 @@ export const mockApartments: Apartment[] = [
       'https://rieltor-images.lunstatic.net/rieltor-ua-01/960/720/offers/928/28/8/1846771979923928.jpg.webp',
     ],
   },
-];
+] as unknown as Apartment[];
